@@ -37,11 +37,12 @@ function Registrar() {
       setErrors({});
       console.log({ username, email, password });
     }
+
     setLoading(true);
     const registered = await api.register({ username, email, password });
     if (registered) {
       setUser(registered.data);
-      console.log("Usuario registrado", registered.data);
+      localStorage.setItem("user", JSON.stringify(registered.data));
       navigate("/getting-started");
     }
     setLoading(false);

@@ -1,4 +1,7 @@
 import React from 'react';
+
+import React, { useEffect } from 'react';
+
 import {
   Home,
   Compass,
@@ -14,6 +17,14 @@ import { useUserStore } from '../store/userStore';
 
 export default function Sidebar() {
   const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
   return (
     <div className="w-64 border-r border-gray-800 p-4 flex flex-col text-white">
       {/* Logo y Título */}

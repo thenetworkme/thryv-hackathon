@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Github } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as api from "../api/aws";
+import { useUserStore } from "../store/userStore";
 
 function Home() {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,6 +10,8 @@ function Home() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +35,14 @@ function Home() {
       usernameOrEmail,
       password,
     });
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        username: usernameOrEmail,
+        email: usernameOrEmail,
+      })
+    );
+    navigate("/chat");
     setLoading(false);
   };
 
