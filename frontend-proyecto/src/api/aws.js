@@ -11,9 +11,13 @@ const api = axios.create({
   },
 });
 
-export const login = async ({ username, password }) => {
+export const login = async ({ usernameOrEmail, password }) => {
   try {
-    const response = await api.post("/login", { username, password });
+    const response = await api.post("auth/login", {
+      usernameOrEmail,
+      password,
+    });
+    console.log(response.data);
     return response;
   } catch (error) {
     return error.response;
@@ -22,11 +26,13 @@ export const login = async ({ username, password }) => {
 
 export const register = async ({ username, email, password }) => {
   try {
-    const response = await api.post("/register", { username, email, password });
-    const data = response.data;
-    console.log(response.data);
-    return response;
+    const response = await api.post("auth/register", {
+      username,
+      email,
+      password,
+    });
+    return response.status >= 200 && response.status < 300;
   } catch (error) {
-    return error.response;
+    return false;
   }
 };

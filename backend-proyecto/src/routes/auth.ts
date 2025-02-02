@@ -36,7 +36,6 @@ const registerUser = async (event, context) => {
     return JSend.error("No se pudo registrar el usuario", 500);
   }
 
-  // return JSend.success(res, 201);
   return {
     statusCode: 201,
     body: JSON.stringify({ message: "Usuario registrado exitosamente" }),
