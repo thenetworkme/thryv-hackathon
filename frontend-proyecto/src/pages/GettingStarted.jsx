@@ -95,15 +95,16 @@ function GettingStarted() {
       currency: divisa,
     });
 
-    localStorage.setItem("company", JSON.stringify(registered.data));
-
-    setCompany({
-      userId: user?.userId || "8",
-      companyName: nombreEmpresa,
-      country: pais,
-      province: provincia,
-      currency: divisa,
-    });
+    localStorage.setItem(
+      "company",
+      JSON.stringify({
+        userId: user?.userId || "8",
+        companyName: nombreEmpresa,
+        country: pais,
+        province: provincia,
+        currency: divisa,
+      })
+    );
     navigate("/chat");
     setLoading(false);
   };
