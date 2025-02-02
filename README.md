@@ -13,8 +13,9 @@
 
 
 ## Objetivo del aplicativo
-El aplicativo *compass* es una aplicacion web en la cual se puede consultar los productos que mejor se ajustan a el presupuesto y necesidades de la empres, asi mismo, este busca las competencias de la empresa en cuestion para poder ofrecer una mejor vision del mercado y apoyar en la planeacion futura.
-De esta forma la palicacion busca ofecer una solucion para las personas y empresas que desean iniciar o estan iniciando emprender reducciendo el tiempo que tienen que durar en el proceso de busqueda de productos y analisis de competidores
+En la republica domiinicana existe una gran cantidad de empresas pequeñas, siendo que estas representan una mayoria del mercado dominicano, no obstante, por su caracteristica de Mipyme puede que estas no tengan los recursos necesarios para comprar los elementso que necesita para el abastecimiento en cualquier proveedor. Nosotros buscamos quitar tiempo en la busqueda de estos recursos para que ldichas empresas puedan mejorar sus procesos y enfocarse en expandirse gastando lo menos posible. Debido a esta idea sale __*Compass*__ 
+
+El aplicativo *Compass* es una aplicacion web en la cual se puede consultar los productos que mejor se ajustan a el presupuesto y necesidades de la empres, asi mismo, este busca las competencias de la empresa en cuestion para poder ofrecer una mejor vision del mercado y apoyar en la planeacion futura. De esta forma la palicacion busca ofecer una solucion para las personas y empresas que desean iniciar o estan iniciando emprender reducciendo el tiempo que tienen que durar en el proceso de busqueda de productos y analisis de competidores
 
 ## Features
 Los principales features que presenta la aplicacion son los siguientes:
@@ -30,13 +31,13 @@ Home: En esta interfaz se encuentras acceso rapido a los dintos features de la a
 ## Arquitectura
 Para la arquetectura del proyecto de esta utilizando:
 - Backend: 
-    - Node.js con express
-    - AWS para almacenamiento
+    - Node.js con express ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+    - AWS para almacenamiento ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 - Frontend:
-    - React como famework
-    - Tailwind como libreria CSS
+    - React como famework 	![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+    - Tailwind como libreria CSS ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 - Base de datos:
-    - Dynamo
+    - Dynamo ![AmazonDynamoDB](https://img.shields.io/badge/Amazon%20DynamoDB-4053D6?style=for-the-badge&logo=Amazon%20DynamoDB&logoColor=white)
 
 ## Costo-Beneficio
 Para el analisis de los costos y beneficios del producto tenemos que primero defnir cuales seran los elementos a utilizar de manera espeficica, para este planteamiento se analizan los siguientes puntos: 
