@@ -21,7 +21,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/working" element={<Working />} />
           <Route path="/my-user" element={<UserSettings />} />
-          <Route path="analisis" element={<Analisis />} />
+          <Route path="/user/analisis-competitivo" element={<Analisis />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -19,12 +19,14 @@ import { Link } from 'react-router-dom';
 export default function Sidebar() {
   return (
     <div className="w-64 border-r border-gray-800 p-4 flex flex-col text-white">
-      <div className="flex items-center gap-2 mb-6">
-        <div className="w-8 h-8">
-          <img src="/fondo.png" alt="" />
+      <Link to="/chat">
+        <div className="flex items-center gap-2 mb-6">
+          <div className="w-8 h-8">
+            <img src="/fondo.png" alt="" />
+          </div>
+          <span className="text-xl font-semibold">COMPASS</span>
         </div>
-        <span className="text-xl font-semibold">COMPASS</span>
-      </div>
+      </Link>
 
       <Button variant="secondary" className="w-full justify-between mb-6">
         <div className="flex items-center gap-2">
@@ -60,14 +62,16 @@ export default function Sidebar() {
             <span>Descubrir productos</span>
           </Button>
         </Link>
-        <Button
-          variant="ghost"
-          className="w-full justify-start hover:bg-gray-800/50 transition-colors"
-        >
-          <AntennaIcon scale={18} className="mr-2" />
+        <Link to="/user/analisis-competitivo">
+          <Button
+            variant="ghost"
+            className="w-full justify-start hover:bg-gray-800/50 transition-colors"
+          >
+            <AntennaIcon scale={18} className="mr-2" />
 
-          <span>Análisis competitivo</span>
-        </Button>
+            <span>Análisis competitivo</span>
+          </Button>
+        </Link>
       </nav>
 
       <div className="mt-auto">

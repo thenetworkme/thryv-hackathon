@@ -1,8 +1,7 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI("AIzaSyB3XymcwIPn6FR20hwulCFGujy36MZLBIY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+const genAI = new GoogleGenerativeAI('AIzaSyB3XymcwIPn6FR20hwulCFGujy36MZLBIY');
+const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
 export async function generateAIResponse(prompt) {
   try {
@@ -13,4 +12,3 @@ export async function generateAIResponse(prompt) {
     throw error;
   }
 }
-
