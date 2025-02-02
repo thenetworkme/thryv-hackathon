@@ -1,24 +1,73 @@
 import middy from "@middy/core";
 import jsonBodyParser from "@middy/http-json-body-parser";
 import httpHeaderNormalizer from "@middy/http-header-normalizer";
-import { hashPassword } from "../utils/hash";
+import { comparePasswords, hashPassword } from "../utils/hash";
+import * as AWS from "aws-sdk";
+import { JSend } from "../utils/jsend";
+import supabase from "../api/supabase";
 
 const registerUser = async (event, context) => {
   const { email, password } = event.body;
-  // const db = new AWS.DynamoDB.DocumentClient();
+
+  if (!email || !password) {
+    return JSend.error("Email and password are required", 400);
+  }
+
+  const { data: existingUsers, error: checkError } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .limit(1);
+
+  if (checkError) return JSend.error("Failed to register user", 500);
+
+  if (existingUsers && existingUsers.length > 0)
+    return JSend.error("Email already registered", 409);
+
   const hash = await hashPassword(password);
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ email, password: hash }),
-  };
+  if (!hash) return JSend.error("Failed to register user", 500);
+
+  const res = await supabase.from("users").insert([
+    {
+      email,
+      password: hash,
+    },
+  ]);
+
+  if (res.status !== 201) {
+    return JSend.error("Failed to register user", 500);
+  }
+
+  return JSend.success(res, 201);
 };
 
-const loginUser = (event, context) => {
+const loginUser = async (event, context) => {
   const { email, password } = event.body;
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ email, password }),
-  };
+
+  if (!email || !password) {
+    return JSend.error("Email and password are required", 400);
+  }
+
+  // get user
+  const { data: users, error: checkError } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .limit(1);
+
+  if (checkError) return JSend.error("Failed to login", 500);
+
+  if (!users || users.length === 0) {
+    return JSend.error("Either email or password is incorrect", 400);
+  }
+
+  const user = users[0];
+  const isPasswordValid = await comparePasswords(password, user.password);
+  if (!isPasswordValid) {
+    return JSend.error("Either email or password is incorrect", 400);
+  }
+
+  return JSend.success({ user }, 200);
 };
 
 const middlewares = (handler) => {
