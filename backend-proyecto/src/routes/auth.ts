@@ -4,12 +4,13 @@ import httpHeaderNormalizer from "@middy/http-header-normalizer";
 import { comparePasswords, hashPassword } from "../utils/hash";
 import { JSend } from "../utils/jsend";
 import supabase from "../api/supabase";
+import cors from "@middy/http-cors";
 
 const registerUser = async (event, context) => {
   const { email, password, username } = event.body;
 
   if (!email || !password)
-    return JSend.error("Email and password are required", 400);
+    return JSend.error("Email y contraseña son requeridos", 400);
 
   const { data: existingUsers, error: checkError } = await supabase
     .from("users")
@@ -19,55 +20,70 @@ const registerUser = async (event, context) => {
     .or(`username.eq.${username}`)
     .limit(1);
 
-  if (checkError) return JSend.error("Failed to register user", 500);
+  if (checkError) return JSend.error("No se pudo registrar el usuario", 500);
 
   if (existingUsers && existingUsers.length > 0)
-    return JSend.error("Either email or username is already taken", 400);
+    return JSend.error("El email o nombre de usuario ya está en uso", 400);
 
   const hash = await hashPassword(password);
-  if (!hash) return JSend.error("Failed to register user", 500);
+  if (!hash) return JSend.error("No se pudo registrar el usuario", 500);
 
   const res = await supabase
     .from("users")
     .insert([{ username, email, password: hash }]);
 
   if (res.status !== 201) {
-    return JSend.error("Failed to register user", 500);
+    return JSend.error("No se pudo registrar el usuario", 500);
   }
 
-  return JSend.success(res, 201);
+  // return JSend.success(res, 201);
+  return {
+    statusCode: 201,
+    body: JSON.stringify({ message: "Usuario registrado exitosamente" }),
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  };
 };
 
 const loginUser = async (event, context) => {
-  const { email, password } = event.body;
+  const { usernameOrEmail, password } = event.body;
 
-  if (!email || !password) {
-    return JSend.error("Email and password are required", 400);
+  if (!usernameOrEmail || !password) {
+    return JSend.error("Email y contraseña son requeridos", 400);
   }
 
-  // get use
   const { data: users, error: checkError } = await supabase
     .from("users")
     .select("*")
-    .eq("email", email)
+    .or(`email.eq.${usernameOrEmail}`)
+    .or(`username.eq.${usernameOrEmail}`)
     .limit(1);
 
-  if (checkError) return JSend.error("Failed to login", 500);
+  if (checkError) return JSend.error("No se pudo iniciar sesión", 500);
 
   if (!users || users.length === 0)
-    return JSend.error("Either email or password is incorrect", 400);
+    return JSend.error("El email o contraseña es incorrecto", 404);
 
   const user = users[0];
   const isPasswordValid = await comparePasswords(password, user.password);
   if (!isPasswordValid)
-    return JSend.error("Either email or password is incorrect", 400);
+    return JSend.error("El email o contraseña es incorrecto", 404);
 
   return JSend.success({ user }, 200);
 };
 
+// Middleware configuration with proper CORS settings
 const middlewares = (handler) => {
-  return middy(handler).use(jsonBodyParser()).use(httpHeaderNormalizer());
+  return middy(handler)
+    .use(
+      cors({
+        origin: "*",
+        headers: "Content-Type,Authorization",
+      })
+    )
+    .use(jsonBodyParser())
+    .use(httpHeaderNormalizer());
 };
-
 export const register = middlewares(registerUser);
 export const login = middlewares(loginUser);

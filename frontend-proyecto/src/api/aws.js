@@ -3,10 +3,12 @@ import axios from "axios";
 const AWS_API_BASE_URL =
   "https://rxm2e5vk9i.execute-api.us-east-1.amazonaws.com";
 
-// axios.defaults.withCredentials = true;
 const api = axios.create({
   baseURL: AWS_API_BASE_URL,
   validateStatus: () => true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export const login = async ({ username, password }) => {

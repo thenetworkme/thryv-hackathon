@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Github } from "lucide-react";
 import { Link } from "react-router-dom";
+
+import * as api from "../api/aws";
 
 function Registrar() {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,7 +11,7 @@ function Registrar() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -29,6 +31,8 @@ function Registrar() {
       setErrors({});
       console.log({ username, email, password });
     }
+
+    const data = await api.register({ username, email, password });
   };
 
   return (
