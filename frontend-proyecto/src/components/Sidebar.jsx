@@ -1,5 +1,3 @@
-import React from 'react';
-
 import React, { useEffect } from 'react';
 
 import {
@@ -48,13 +46,15 @@ export default function Sidebar() {
 
       {/* Navegación */}
       <nav className="space-y-2">
-        <Button
-          variant="ghost"
-          className="w-full justify-start hover:bg-gray-800/50 transition-colors"
-        >
-          <Home size={18} className="mr-2" />
-          <span>Inicio</span>
-        </Button>
+        <Link to="/chat">
+          <Button
+            variant="ghost"
+            className="w-full justify-start hover:bg-gray-800/50 transition-colors"
+          >
+            <Home size={18} className="mr-2" />
+            <span>Inicio</span>
+          </Button>
+        </Link>
         <Link to="/working">
           <Button
             variant="ghost"
