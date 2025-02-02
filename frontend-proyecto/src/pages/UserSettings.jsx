@@ -9,7 +9,6 @@ import {
   Upload,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useCompanyStore } from "../store/companyStore";
 
 const paisesYDivisas = {
   "Republica Dominicana": "DOP",
@@ -76,8 +75,6 @@ function GettingStarted() {
     setPais(nuevoPais);
     setDivisa(paisesYDivisas[nuevoPais]);
   };
-
-  const company = useCompanyStore((state) => state.company);
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
