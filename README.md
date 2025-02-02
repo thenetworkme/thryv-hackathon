@@ -26,13 +26,39 @@ Para la arquetectura del proyecto de esta utilizando:
 - Base de datos:
     - Dynamo
 
-### Costo
-Como se platea el uso de Dynamo para la base de datos tenemos los siguientes costos:
+### Costo-Beneficio
+Para el analisis de los costos y beneficios del producto tenemos que primero defnir cuales seran los elementos a utilizar de manera espeficica, para este planteamiento se analizan los siguientes puntos: 
 
-- Escritura: 0.625
-- Lectura: 0.125
-- Por GB: 0.25 despues de 25GB
+Con Dynamo Pricing for On-Demand Capacity por medio de AWS para la base de datos tenemos los siguientes costos:
 
-Dado el caso en el cual tenemos a lo largo de un mes una 
+- Escritura: __*$0.625*__ por 1millon de peticiones
+- Lectura: __*$0.125*__ 1millon de peticiones
+- Por GB: __*$0.25*__ despues de 25GB
+
+Con Gemini 1.5 flash Pay-as-you-go tenemos por cada millon de tokens:
+
+- Input token: __*0.075*__
+- Output token: __*0.3*__
+- Context token: __*0.01875*__
+
+Asi mismo para el hosting en AWS con Amazon EC2 tenemos el sigiente costo:
+
+- __*0.9*__ Por cada GB del primer TB al mes 
+
+Asi mismo se ha modelado de manera conservadora la cantidad de Mipymes que usuaran el aplicativo, siendo que hay un alrededor de __1.5 millones de Mipymes__ en el pais, se estima que alrededor de __150__ van a estar usando la aplicacion de manera inicial, de manera que en el primer año con un aumento mensual del 0.025% de las mismas acabar con __563__ empresas. 
+
+Por ultimo antes de ver el analisi monetario aqui hay una serie de supuestos:
+
+- Cantidad de request de escritura por usuario mes: __*50*__
+- Cantidad de request de lectura por usuario al mes: __*100*__
+- Tamaño en KB ocupado por usuario usuario: __*100*__
+- Consultas promedio al mes: __*20*__
+- Caracteres por consulta: __*1000*__
+- Caracteres por respuesta: __*5000*__
+- Cantidad de token de Contexto: __*1000000*__
+
+<img width="527" alt="Image" src="https://github.com/user-attachments/assets/7358d745-cf02-471d-891a-50045ff0093c" />
+
+
 
 
