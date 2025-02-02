@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, Github } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
+
 function Registrar() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -13,13 +14,13 @@ function Registrar() {
     const newErrors = {};
 
     if (!username.trim()) {
-      newErrors.username = 'El usuario es requerido';
+      newErrors.username = "El usuario es requerido";
     }
     if (!email.trim()) {
-      newErrors.email = 'El correo es requerido';
+      newErrors.email = "El correo es requerido";
     }
     if (!password.trim()) {
-      newErrors.password = 'La contraseña es requerida';
+      newErrors.password = "La contraseña es requerida";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -110,7 +111,7 @@ function Registrar() {
                   <input
                     id="password"
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"

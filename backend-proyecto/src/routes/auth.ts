@@ -6,7 +6,7 @@ import { JSend } from "../utils/jsend";
 import supabase from "../api/supabase";
 
 const registerUser = async (event, context) => {
-  const { email, password } = event.body;
+  const { email, password, username } = event.body;
 
   if (!email || !password)
     return JSend.error("Email and password are required", 400);
@@ -14,18 +14,22 @@ const registerUser = async (event, context) => {
   const { data: existingUsers, error: checkError } = await supabase
     .from("users")
     .select("*")
-    .eq("email", email)
+    // match rows that satisfy either condition
+    .or(`email.eq.${email}`)
+    .or(`username.eq.${username}`)
     .limit(1);
 
   if (checkError) return JSend.error("Failed to register user", 500);
 
   if (existingUsers && existingUsers.length > 0)
-    return JSend.error("Email already registered", 409);
+    return JSend.error("Either email or username is already taken", 400);
 
   const hash = await hashPassword(password);
   if (!hash) return JSend.error("Failed to register user", 500);
 
-  const res = await supabase.from("users").insert([{ email, password: hash }]);
+  const res = await supabase
+    .from("users")
+    .insert([{ username, email, password: hash }]);
 
   if (res.status !== 201) {
     return JSend.error("Failed to register user", 500);
@@ -41,7 +45,7 @@ const loginUser = async (event, context) => {
     return JSend.error("Email and password are required", 400);
   }
 
-  // get user
+  // get use
   const { data: users, error: checkError } = await supabase
     .from("users")
     .select("*")
