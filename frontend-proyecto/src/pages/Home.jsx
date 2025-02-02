@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, Github } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as api from '../api/aws';
+import React, { useState } from "react";
+import { Eye, EyeOff, Github } from "lucide-react";
+import { Link } from "react-router-dom";
+import * as api from "../api/aws";
 
 function Home() {
   const [showPassword, setShowPassword] = useState(false);
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -15,10 +15,10 @@ function Home() {
     const newErrors = {};
 
     if (!usernameOrEmail.trim()) {
-      newErrors.username = 'El usuario es requerido';
+      newErrors.username = "El usuario es requerido";
     }
     if (!password.trim()) {
-      newErrors.password = 'La contraseña es requerida';
+      newErrors.password = "La contraseña es requerida";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -95,7 +95,7 @@ function Home() {
                   <input
                     id="password"
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -174,7 +174,7 @@ function Home() {
           </div>
 
           <p className="text-center text-sm text-gray-600">
-            Nuevo en el sistema?{' '}
+            Nuevo en el sistema?{" "}
             <Link
               to="/registrar"
               className="font-medium text-blue-600 hover:text-blue-500"

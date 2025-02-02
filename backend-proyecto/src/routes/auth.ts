@@ -32,10 +32,17 @@ const registerUser = async (event, context) => {
     .from("users")
     .insert([{ username, email, password: hash }]);
 
-  if (res.status !== 201) {
+  // search for the user
+  const { data: users } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .limit(1);
+
+  if (res.status !== 201 || !users || users.length === 0) {
     return JSend.error("No se pudo registrar el usuario", 500);
   }
-  return JSend.success(res.data, 201);
+  return JSend.success(users[0], 201);
 };
 
 const loginUser = async (event, context) => {

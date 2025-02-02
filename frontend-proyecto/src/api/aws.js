@@ -20,6 +20,8 @@ export const login = async ({ usernameOrEmail, password }) => {
     console.log(response.data);
     return response;
   } catch (error) {
+    console.error(error);
+
     return error.response;
   }
 };
@@ -31,8 +33,32 @@ export const register = async ({ username, email, password }) => {
       email,
       password,
     });
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const saveCompany = async ({
+  userId,
+  companyName,
+  country,
+  province,
+  currency,
+}) => {
+  try {
+    const response = await api.post("user/configure", {
+      userId,
+      companyName,
+      country,
+      province,
+      currency,
+    });
     return response.status >= 200 && response.status < 300;
   } catch (error) {
+    console.error(error);
     return false;
   }
 };

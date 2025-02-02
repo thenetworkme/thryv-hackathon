@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Home,
   Compass,
@@ -7,16 +7,13 @@ import {
   Plus,
   Settings,
   AntennaIcon,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { CardHeader } from '@/components/ui/card';
-import { CardTitle } from '@/components/ui/card';
-import { CardDescription } from '@/components/ui/card';
-import { CardContent } from '@/components/ui/card';
-import { Link } from 'react-router-dom';
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { useUserStore } from "../store/userStore";
 
 export default function Sidebar() {
+  const user = useUserStore((state) => state.user);
   return (
     <div className="w-64 border-r border-gray-800 p-4 flex flex-col text-white">
       <Link to="/chat">
@@ -77,7 +74,7 @@ export default function Sidebar() {
       <div className="mt-auto">
         <div className="flex items-center gap-2 px-4 py-2 mt-4">
           <div className="w-8 h-8 bg-gray-700 rounded-full"></div>
-          <span>Usuario</span>
+          {user ? <span>{user.email}</span> : <span>Usuario</span>}
           <Settings size={18} className="ml-auto text-gray-400" />
         </div>
       </div>

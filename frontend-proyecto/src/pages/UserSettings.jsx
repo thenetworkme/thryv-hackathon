@@ -1,55 +1,56 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Listbox, Transition, Switch } from '@headlessui/react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Listbox, Transition, Switch } from "@headlessui/react";
 import {
   HomeIcon,
   GlobeIcon,
   DollarSignIcon,
   ShoppingCartIcon,
   Upload,
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { useCompanyStore } from "../store/companyStore";
 
 const paisesYDivisas = {
-  'Republica Dominicana': 'DOP',
-  'Estados Unidos': 'USD',
-  México: 'MXN',
-  Colombia: 'COP',
-  Argentina: 'ARS',
-  Peru: 'PEN',
-  Bolivia: 'BOB',
-  Uruguay: 'UYU',
+  "Republica Dominicana": "DOP",
+  "Estados Unidos": "USD",
+  México: "MXN",
+  Colombia: "COP",
+  Argentina: "ARS",
+  Peru: "PEN",
+  Bolivia: "BOB",
+  Uruguay: "UYU",
 };
 const paises = Object.keys(paisesYDivisas);
-const divisas = ['DOP', 'USD', 'EUR', 'CNY', 'MXN', 'INR'];
+const divisas = ["DOP", "USD", "EUR", "CNY", "MXN", "INR"];
 const tiendasPreferidas = [
   {
-    nombre: 'Alibaba',
+    nombre: "Alibaba",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'AliExpress',
+    nombre: "AliExpress",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'Temu',
+    nombre: "Temu",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'Amazon',
+    nombre: "Amazon",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'eBay',
+    nombre: "eBay",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
 ];
 
 function GettingStarted() {
-  const [nombreEmpresa, setNombreEmpresa] = useState('');
+  const [nombreEmpresa, setNombreEmpresa] = useState("");
   const [pais, setPais] = useState(paises[0]);
   const [divisa, setDivisa] = useState(paisesYDivisas[paises[0]]);
-  const [provincia, setProvincia] = useState('');
+  const [provincia, setProvincia] = useState("");
   const [tiendasSeleccionadas, setTiendasSeleccionadas] = useState({});
   const [fotoPerfil, setFotoPerfil] = useState(null);
 
@@ -76,6 +77,8 @@ function GettingStarted() {
     setDivisa(paisesYDivisas[nuevoPais]);
   };
 
+  const company = useCompanyStore((state) => state.company);
+
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
       <div className="w-full max-w-3xl p-8 bg-gray-800 rounded-lg text-white">
@@ -91,7 +94,7 @@ function GettingStarted() {
           <input
             id="nombreEmpresa"
             type="text"
-            value={nombreEmpresa}
+            value={company.companyName}
             onChange={(e) => setNombreEmpresa(e.target.value)}
             placeholder="Ej. Mi Empresa S.A."
             className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
@@ -123,7 +126,7 @@ function GettingStarted() {
                       value={paisOption}
                       className={({ active }) =>
                         `cursor-default select-none relative py-2 pl-3 pr-9 ${
-                          active ? 'bg-blue-600 text-white' : 'text-gray-300'
+                          active ? "bg-blue-600 text-white" : "text-gray-300"
                         }`
                       }
                     >
@@ -173,7 +176,7 @@ function GettingStarted() {
                       value={divisaOption}
                       className={({ active }) =>
                         `cursor-default select-none relative py-2 pl-3 pr-9 ${
-                          active ? 'bg-blue-600 text-white' : 'text-gray-300'
+                          active ? "bg-blue-600 text-white" : "text-gray-300"
                         }`
                       }
                     >
@@ -206,16 +209,16 @@ function GettingStarted() {
                     onChange={() => toggleTienda(nombre)}
                     className={`${
                       tiendasSeleccionadas[nombre]
-                        ? 'bg-blue-600'
-                        : 'bg-gray-600'
+                        ? "bg-blue-600"
+                        : "bg-gray-600"
                     } relative inline-flex h-6 w-11 items-center rounded-full`}
                   >
                     <span className="sr-only">Activar {nombre}</span>
                     <span
                       className={`${
                         tiendasSeleccionadas[nombre]
-                          ? 'translate-x-6'
-                          : 'translate-x-1'
+                          ? "translate-x-6"
+                          : "translate-x-1"
                       } inline-block h-4 w-4 transform rounded-full bg-white transition`}
                     />
                   </Switch>
