@@ -9,12 +9,7 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:*
-      Resource:
-        - arn:aws:dynamodb:us-east-1:677276097870:table/users
+
 functions:
   registerUser:
     handler: src/routes/auth.register
@@ -28,17 +23,3 @@ functions:
       - httpApi:
           path: /auth/login
           method: post
-
-resources:
-  Resources:
-    users:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: users
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH

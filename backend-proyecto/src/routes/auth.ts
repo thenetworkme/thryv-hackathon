@@ -2,7 +2,6 @@ import middy from "@middy/core";
 import jsonBodyParser from "@middy/http-json-body-parser";
 import httpHeaderNormalizer from "@middy/http-header-normalizer";
 import { comparePasswords, hashPassword } from "../utils/hash";
-import * as AWS from "aws-sdk";
 import { JSend } from "../utils/jsend";
 import supabase from "../api/supabase";
 
