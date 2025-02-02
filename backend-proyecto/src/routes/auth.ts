@@ -8,9 +8,8 @@ import supabase from "../api/supabase";
 const registerUser = async (event, context) => {
   const { email, password } = event.body;
 
-  if (!email || !password) {
+  if (!email || !password)
     return JSend.error("Email and password are required", 400);
-  }
 
   const { data: existingUsers, error: checkError } = await supabase
     .from("users")
@@ -26,12 +25,7 @@ const registerUser = async (event, context) => {
   const hash = await hashPassword(password);
   if (!hash) return JSend.error("Failed to register user", 500);
 
-  const res = await supabase.from("users").insert([
-    {
-      email,
-      password: hash,
-    },
-  ]);
+  const res = await supabase.from("users").insert([{ email, password: hash }]);
 
   if (res.status !== 201) {
     return JSend.error("Failed to register user", 500);
@@ -56,15 +50,13 @@ const loginUser = async (event, context) => {
 
   if (checkError) return JSend.error("Failed to login", 500);
 
-  if (!users || users.length === 0) {
+  if (!users || users.length === 0)
     return JSend.error("Either email or password is incorrect", 400);
-  }
 
   const user = users[0];
   const isPasswordValid = await comparePasswords(password, user.password);
-  if (!isPasswordValid) {
+  if (!isPasswordValid)
     return JSend.error("Either email or password is incorrect", 400);
-  }
 
   return JSend.success({ user }, 200);
 };
