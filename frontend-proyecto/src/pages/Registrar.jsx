@@ -3,6 +3,7 @@ import { Eye, EyeOff, Github } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 import * as api from "../api/aws";
+import { useUserStore } from "../store/userStore";
 
 function Registrar() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,7 +12,10 @@ function Registrar() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+
+  const setUser = useUserStore((state) => state.setUser);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +40,11 @@ function Registrar() {
     setLoading(true);
     const registered = await api.register({ username, email, password });
     if (registered) {
+      setUser({
+        userId: registered.userId,
+        username,
+        email,
+      });
       navigate("/getting-started");
     }
     setLoading(false);

@@ -1,59 +1,59 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Listbox, Transition, Switch } from '@headlessui/react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Listbox, Transition, Switch } from "@headlessui/react";
 import {
   HomeIcon,
   GlobeIcon,
   DollarSignIcon,
   ShoppingCartIcon,
-  Upload,
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
+} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import * as api from "../api/aws";
+import { useUserStore } from "../store/userStore";
 
 const paisesYDivisas = {
-  'Republica Dominicana': 'DOP',
-  'Estados Unidos': 'USD',
-  México: 'MXN',
-  Colombia: 'COP',
-  Argentina: 'ARS',
-  Peru: 'PEN',
-  Bolivia: 'BOB',
-  Uruguay: 'UYU',
+  "Republica Dominicana": "DOP",
+  "Estados Unidos": "USD",
+  México: "MXN",
+  Colombia: "COP",
+  Argentina: "ARS",
+  Peru: "PEN",
+  Bolivia: "BOB",
+  Uruguay: "UYU",
 };
 
 const paises = Object.keys(paisesYDivisas);
-const divisas = ['DOP', 'USD', 'EUR', 'CNY', 'MXN', 'INR'];
+const divisas = ["DOP", "USD", "EUR", "CNY", "MXN", "INR"];
 const tiendasPreferidas = [
   {
-    nombre: 'Alibaba',
+    nombre: "Alibaba",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'AliExpress',
+    nombre: "AliExpress",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'Temu',
+    nombre: "Temu",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'Amazon',
+    nombre: "Amazon",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
   {
-    nombre: 'eBay',
+    nombre: "eBay",
     icono: <ShoppingCartIcon className="h-5 w-5 text-gray-400" />,
   },
 ];
-
 function GettingStarted() {
-  const [nombreEmpresa, setNombreEmpresa] = useState('');
+  const [nombreEmpresa, setNombreEmpresa] = useState("");
   const [pais, setPais] = useState(paises[0]);
   const [divisa, setDivisa] = useState(paisesYDivisas[paises[0]]);
-  const [provincia, setProvincia] = useState('');
+  const [provincia, setProvincia] = useState("");
   const [tiendasSeleccionadas, setTiendasSeleccionadas] = useState({});
   const [fotoPerfil, setFotoPerfil] = useState(null);
-  const [presupuesto, setPresupuesto] = useState('');
+  const [presupuesto, setPresupuesto] = useState("");
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -77,12 +77,32 @@ function GettingStarted() {
     setDivisa(paisesYDivisas[nuevoPais]);
   };
 
+  const user = useUserStore((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleSave = async () => {
+    console.log("Guardando configuración");
+    setLoading(true);
+
+    await api.saveCompany({
+      userId: user?.userId || "8",
+      companyName: nombreEmpresa,
+      country: pais,
+      province: provincia,
+      currency: divisa,
+    });
+    navigate("/chat");
+    setLoading(false);
+  };
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-3xl space-y-8"
       >
         <div className="flex items-center space-x-2">
@@ -110,7 +130,7 @@ function GettingStarted() {
           </div>
           <div className="relative">
             <img
-              src={fotoPerfil || 'https://via.placeholder.com/100'}
+              src={fotoPerfil || "https://via.placeholder.com/100"}
               alt="Foto de perfil"
               className="h-24 w-24 rounded-full object-cover border-2 border-gray-700"
             />
@@ -158,7 +178,7 @@ function GettingStarted() {
                       value={paisOption}
                       className={({ active }) =>
                         `cursor-default select-none relative py-2 pl-3 pr-9 ${
-                          active ? 'bg-blue-600 text-white' : 'text-gray-300'
+                          active ? "bg-blue-600 text-white" : "text-gray-300"
                         }`
                       }
                     >
@@ -236,7 +256,7 @@ function GettingStarted() {
                       value={divisaOption}
                       className={({ active }) =>
                         `cursor-default select-none relative py-2 pl-3 pr-9 ${
-                          active ? 'bg-blue-600 text-white' : 'text-gray-300'
+                          active ? "bg-blue-600 text-white" : "text-gray-300"
                         }`
                       }
                     >
@@ -272,16 +292,16 @@ function GettingStarted() {
                     onChange={() => toggleTienda(nombre)}
                     className={`${
                       tiendasSeleccionadas[nombre]
-                        ? 'bg-blue-600'
-                        : 'bg-gray-600'
+                        ? "bg-blue-600"
+                        : "bg-gray-600"
                     } relative inline-flex h-6 w-11 items-center rounded-full`}
                   >
                     <span className="sr-only">Activar {nombre}</span>
                     <span
                       className={`${
                         tiendasSeleccionadas[nombre]
-                          ? 'translate-x-6'
-                          : 'translate-x-1'
+                          ? "translate-x-6"
+                          : "translate-x-1"
                       } inline-block h-4 w-4 transform rounded-full bg-white transition`}
                     />
                   </Switch>
@@ -290,14 +310,20 @@ function GettingStarted() {
             ))}
           </div>
         </div>
-        <Link to="/chat">
+
+        {loading ? (
+          <div className="flex justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        ) : (
           <button
+            onClick={handleSave}
             type="button"
             className="w-full py-3 my-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             Guardar configuración
           </button>
-        </Link>
+        )}
       </motion.div>
     </div>
   );

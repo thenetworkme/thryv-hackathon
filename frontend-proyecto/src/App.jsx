@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
-import Registrar from './pages/Registrar';
-import GettingStarted from './pages/GettingStarted';
-import Chat from './pages/Chat';
-import NotFound from './pages/NotFound';
-import Working from './pages/Working';
-import UserSettings from './pages/UserSettings';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Registrar from "./pages/Registrar";
+import GettingStarted from "./pages/GettingStarted";
+import Chat from "./pages/Chat";
+import NotFound from "./pages/NotFound";
+import Working from "./pages/Working";
+import UserSettings from "./pages/UserSettings";
 
 function App() {
   return (
