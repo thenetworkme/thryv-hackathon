@@ -25,6 +25,12 @@ functions:
       - httpApi:
           path: /auth/login
           method: post
+  configureProfile:
+    handler: src/routes/user.saveCompany
+    events:
+      - httpApi:
+          path: /user/configure
+          method: post
 
 plugins:
   - serverless-offline

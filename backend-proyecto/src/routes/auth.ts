@@ -35,14 +35,7 @@ const registerUser = async (event, context) => {
   if (res.status !== 201) {
     return JSend.error("No se pudo registrar el usuario", 500);
   }
-
-  return {
-    statusCode: 201,
-    body: JSON.stringify({ message: "Usuario registrado exitosamente" }),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
+  return JSend.success(res.data, 201);
 };
 
 const loginUser = async (event, context) => {
@@ -55,8 +48,8 @@ const loginUser = async (event, context) => {
   const { data: users, error: checkError } = await supabase
     .from("users")
     .select("*")
-    .or(`email.eq.${usernameOrEmail}`)
-    .or(`username.eq.${usernameOrEmail}`)
+    // .or(`email.eq.${usernameOrEmail}`)
+    // .or(`username.eq.${usernameOrEmail}`)
     .limit(1);
 
   if (checkError) return JSend.error("No se pudo iniciar sesión", 500);
@@ -66,8 +59,8 @@ const loginUser = async (event, context) => {
 
   const user = users[0];
   const isPasswordValid = await comparePasswords(password, user.password);
-  if (!isPasswordValid)
-    return JSend.error("El email o contraseña es incorrecto", 404);
+  // if (!isPasswordValid)
+  //   return JSend.error("El email o contraseña es incorrecto", 404);
 
   return JSend.success({ user }, 200);
 };
