@@ -72,6 +72,8 @@ function GettingStarted() {
     }));
   };
 
+  const setCompany = useCompanyStore((state) => state.setCompany);
+
   const handlePaisChange = (nuevoPais) => {
     setPais(nuevoPais);
     setDivisa(paisesYDivisas[nuevoPais]);
@@ -85,6 +87,14 @@ function GettingStarted() {
     setLoading(true);
 
     await api.saveCompany({
+      userId: user?.userId || "8",
+      companyName: nombreEmpresa,
+      country: pais,
+      province: provincia,
+      currency: divisa,
+    });
+
+    setCompany({
       userId: user?.userId || "8",
       companyName: nombreEmpresa,
       country: pais,

@@ -40,11 +40,8 @@ function Registrar() {
     setLoading(true);
     const registered = await api.register({ username, email, password });
     if (registered) {
-      setUser({
-        userId: registered.userId,
-        username,
-        email,
-      });
+      setUser(registered.data);
+      console.log("Usuario registrado", registered.data);
       navigate("/getting-started");
     }
     setLoading(false);
