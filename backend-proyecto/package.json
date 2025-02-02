@@ -1,0 +1,29 @@
+{
+  "name": "backend-proyecto",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "sls offline --stage dev --region us-east-1"
+  },
+  "dependencies": {
+    "@middy/core": "^6.0.0",
+    "@middy/http-header-normalizer": "^6.0.0",
+    "@middy/http-json-body-parser": "^6.0.0",
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "serverless-http": "^3.2.0",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "@serverless/typescript": "^3.38.0",
+    "@types/aws-lambda": "^8.10.147",
+    "@types/node": "^22.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "serverless-plugin-typescript": "^2.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
+  }
+}
