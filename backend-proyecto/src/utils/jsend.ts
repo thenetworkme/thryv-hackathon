@@ -20,6 +20,9 @@ export class JSend {
     };
 
     return {
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      },
       statusCode,
       body: JSON.stringify(body),
     };
@@ -32,6 +35,9 @@ export class JSend {
     };
 
     return {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       statusCode,
       body: JSON.stringify(body),
     };
@@ -44,6 +50,9 @@ export class JSend {
     };
 
     return {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       statusCode,
       body: JSON.stringify(body),
     };
