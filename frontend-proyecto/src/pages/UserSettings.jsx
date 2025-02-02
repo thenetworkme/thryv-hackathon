@@ -20,7 +20,6 @@ const paisesYDivisas = {
   Bolivia: 'BOB',
   Uruguay: 'UYU',
 };
-
 const paises = Object.keys(paisesYDivisas);
 const divisas = ['DOP', 'USD', 'EUR', 'CNY', 'MXN', 'INR'];
 const tiendasPreferidas = [
@@ -53,7 +52,7 @@ function GettingStarted() {
   const [provincia, setProvincia] = useState('');
   const [tiendasSeleccionadas, setTiendasSeleccionadas] = useState({});
   const [fotoPerfil, setFotoPerfil] = useState(null);
-  const [presupuesto, setPresupuesto] = useState('');
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -79,64 +78,30 @@ function GettingStarted() {
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-3xl space-y-8"
-      >
-        <div className="flex items-center space-x-2">
-          <HomeIcon className="h-6 w-6 text-blue-500" />
-          <h1 className="text-2xl font-bold text-white">
-            Configura tu empresa
-          </h1>
+      <div className="w-full max-w-3xl p-8 bg-gray-800 rounded-lg text-white">
+        <h1 className="text-2xl font-bold mb-6">Configura tu empresa</h1>
+
+        <div className="mb-4">
+          <label
+            htmlFor="nombreEmpresa"
+            className="block text-sm font-medium mb-2"
+          >
+            Nombre de la empresa
+          </label>
+          <input
+            id="nombreEmpresa"
+            type="text"
+            value={nombreEmpresa}
+            onChange={(e) => setNombreEmpresa(e.target.value)}
+            placeholder="Ej. Mi Empresa S.A."
+            className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
+          />
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="w-2/3 pr-4">
-            <div className="flex items-center space-x-2">
-              <HomeIcon className="h-5 w-5 text-blue-500" />
-              <label className="block text-sm font-medium text-gray-400">
-                Nombre de la empresa
-              </label>
-            </div>
-            <input
-              type="text"
-              value={nombreEmpresa}
-              onChange={(e) => setNombreEmpresa(e.target.value)}
-              placeholder="Ej. Mi Empresa S.A."
-              className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
-            />
-          </div>
-          <div className="relative">
-            <img
-              src={fotoPerfil || 'https://via.placeholder.com/100'}
-              alt="Foto de perfil"
-              className="h-24 w-24 rounded-full object-cover border-2 border-gray-700"
-            />
-            <label
-              htmlFor="file-upload"
-              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full cursor-pointer opacity-0 hover:opacity-100 transition-opacity"
-            >
-              <GlobeIcon className="h-6 w-6 text-white" />
-            </label>
-            <input
-              id="file-upload"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <GlobeIcon className="h-5 w-5 text-blue-500" />
-            <label className="block text-sm font-medium text-gray-400">
-              País de origen
-            </label>
-          </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">
+            País de origen
+          </label>
           <Listbox value={pais} onChange={handlePaisChange}>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white">
@@ -171,14 +136,12 @@ function GettingStarted() {
           </Listbox>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <GlobeIcon className="h-5 w-5 text-blue-500" />
-            <label className="block text-sm font-medium text-gray-400">
-              Provincia o Estado
-            </label>
-          </div>
+        <div className="mb-4">
+          <label htmlFor="provincia" className="block text-sm font-medium mb-2">
+            Provincia o Estado
+          </label>
           <input
+            id="provincia"
             type="text"
             value={provincia}
             onChange={(e) => setProvincia(e.target.value)}
@@ -186,35 +149,9 @@ function GettingStarted() {
             className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
           />
         </div>
-        <div className="mb-4">
-          <div className="flex items-center space-x-2">
-            <DollarSignIcon className="h-5 w-5 text-blue-500" />
-            <label className="block text-sm font-medium text-gray-400">
-              Presupuesto de la empresa
-            </label>
-          </div>
-          <div className="relative">
-            <input
-              id="presupuesto"
-              type="text"
-              value={presupuesto}
-              onChange={(e) => setPresupuesto(e.target.value)}
-              placeholder="Ej. 50000"
-              className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
-            />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <DollarSignIcon className="h-5 w-5 text-gray-400" />
-            </div>
-          </div>
-        </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <DollarSignIcon className="h-5 w-5 text-blue-500" />
-            <label className="block text-sm font-medium text-gray-400">
-              Divisa
-            </label>
-          </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">Divisa</label>
           <Listbox value={divisa} onChange={setDivisa}>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white">
@@ -249,18 +186,15 @@ function GettingStarted() {
           </Listbox>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <ShoppingCartIcon className="h-5 w-5 text-blue-500" />
-            <label className="block text-sm font-medium text-gray-400">
-              Tiendas preferidas
-            </label>
-          </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">
+            Tiendas preferidas
+          </label>
           <div className="grid grid-cols-2 gap-4">
             {tiendasPreferidas.map(({ nombre, icono }) => (
               <div
                 key={nombre}
-                className={`relative p-4 rounded-lg bg-gray-700 bg-opacity-50 hover:bg-opacity-70 transition-all duration-300`}
+                className="relative p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -290,15 +224,18 @@ function GettingStarted() {
             ))}
           </div>
         </div>
-        <Link to="/chat">
-          <button
-            type="button"
-            className="w-full py-3 my-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
+
+        <div className="flex justify-between">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
             Guardar configuración
           </button>
-        </Link>
-      </motion.div>
+          <Link to="/">
+            <button className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
+              Ir a Home
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
