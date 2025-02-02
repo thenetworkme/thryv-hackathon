@@ -1,5 +1,15 @@
 # Compass
 ![Image](https://github.com/user-attachments/assets/6bb92036-d821-4a65-ba1f-6aa405bdc185)
+
+- [Compass](#compass)
+  - [Objetivo del aplicativo](#objetivo-del-aplicativo)
+  - [Features](#features)
+  - [Pantallas en la ver1.0](#pantallas-en-la-ver10)
+  - [Arquitectura](#arquitectura)
+  - [Costo-Beneficio](#costo-beneficio)
+    - [Beneficios](#beneficios)
+
+
 ## Objetivo del aplicativo
 El aplicativo *compass* es una aplicacion web en la cual se puede consultar los productos que mejor se ajustan a el presupuesto y necesidades de la empres, asi mismo, este busca las competencias de la empresa en cuestion para poder ofrecer una mejor vision del mercado y apoyar en la planeacion futura.
 De esta forma la palicacion busca ofecer una solucion para las personas y empresas que desean iniciar o estan iniciando emprender reducciendo el tiempo que tienen que durar en el proceso de busqueda de productos y analisis de competidores
