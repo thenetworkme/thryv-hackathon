@@ -7,6 +7,7 @@ import Chat from './pages/Chat';
 import NotFound from './pages/NotFound';
 import Working from './pages/Working';
 import UserSettings from './pages/UserSettings';
+import Analisis from './pages/Analisis';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/working" element={<Working />} />
           <Route path="/my-user" element={<UserSettings />} />
+          <Route path="analisis" element={<Analisis />} />
         </Routes>
       </BrowserRouter>
     </>

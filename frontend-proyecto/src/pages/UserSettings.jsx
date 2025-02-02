@@ -229,7 +229,7 @@ function GettingStarted() {
           <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
             Guardar configuración
           </button>
-          <Link to="/">
+          <Link to="/chat">
             <button className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
               Ir a Home
             </button>

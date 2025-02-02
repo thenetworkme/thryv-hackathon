@@ -21,14 +21,9 @@ export default function Sidebar() {
     <div className="w-64 border-r border-gray-800 p-4 flex flex-col text-white">
       <div className="flex items-center gap-2 mb-6">
         <div className="w-8 h-8">
-          <svg viewBox="0 0 24 24" className="w-full h-full text-[#00A3FF]">
-            <path
-              fill="currentColor"
-              d="M12 2L2 19h20L12 2zm0 4l6.5 11h-13L12 6z"
-            />
-          </svg>
+          <img src="/fondo.png" alt="" />
         </div>
-        <span className="text-xl font-semibold">prueba</span>
+        <span className="text-xl font-semibold">COMPASS</span>
       </div>
 
       <Button variant="secondary" className="w-full justify-between mb-6">
@@ -56,13 +51,15 @@ export default function Sidebar() {
             <span>Historia</span>
           </Button>
         </Link>
-        <Button
-          variant="ghost"
-          className="w-full justify-start hover:bg-gray-800/50 transition-colors"
-        >
-          <Compass size={18} className="mr-2" />
-          <span>Descubrir productos</span>
-        </Button>
+        <Link to="/working">
+          <Button
+            variant="ghost"
+            className="w-full justify-start hover:bg-gray-800/50 transition-colors"
+          >
+            <Compass size={18} className="mr-2" />
+            <span>Descubrir productos</span>
+          </Button>
+        </Link>
         <Button
           variant="ghost"
           className="w-full justify-start hover:bg-gray-800/50 transition-colors"
