@@ -19,7 +19,7 @@ const configureCompany = async (event, context) => {
   if (userError) return JSend.error("El usuario no existe", 404);
 
   // save the company
-  const { data, error } = await supabase.from("companies").insert([
+  const { data, error: checkError } = await supabase.from("companies").insert([
     {
       userId,
       companyName,
@@ -28,9 +28,9 @@ const configureCompany = async (event, context) => {
       currency,
     },
   ]);
+  console.log(checkError);
 
-  if (error) return JSend.error("No se pudo registrar la empresa", 500);
-  console.log(error);
+  if (checkError) return JSend.error("No se pudo registrar la empresa", 500);
   return JSend.success(data, 201);
 };
 
