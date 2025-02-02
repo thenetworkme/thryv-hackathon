@@ -1,7 +1,9 @@
 # Compass
 ![Image](https://github.com/user-attachments/assets/6bb92036-d821-4a65-ba1f-6aa405bdc185)
 
+# Tabla de contenido
 - [Compass](#compass)
+- [Tabla de contenido](#tabla-de-contenido)
   - [Objetivo del aplicativo](#objetivo-del-aplicativo)
   - [Features](#features)
   - [Pantallas en la ver1.0](#pantallas-en-la-ver10)
@@ -45,7 +47,7 @@ Con Dynamo Pricing for On-Demand Capacity por medio de AWS para la base de datos
 - Lectura: __*$0.125*__ 1millon de peticiones
 - Por GB: __*$0.25*__ despues de 25GB
 
-Con Gemini 1.5 flash Pay-as-you-go tenemos por cada millon de tokens:
+Con ![Google Gemini](https://img.shields.io/badge/google%20gemini-8E75B2?style=for-the-badge&logo=google%20gemini&logoColor=white) Gemini 1.5 flash Pay-as-you-go tenemos por cada millon de tokens:
 
 - Input token: __*$0.075*__
 - Output token: __*$0.3*__
