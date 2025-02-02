@@ -14,6 +14,7 @@ import { CardHeader } from '@/components/ui/card';
 import { CardTitle } from '@/components/ui/card';
 import { CardDescription } from '@/components/ui/card';
 import { CardContent } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
   return (
@@ -46,13 +47,15 @@ export default function Sidebar() {
           <Home size={18} className="mr-2" />
           <span>Inicio</span>
         </Button>
-        <Button
-          variant="ghost"
-          className="w-full justify-start hover:bg-gray-800/50 transition-colors"
-        >
-          <Library size={18} className="mr-2" />
-          <span>Historia</span>
-        </Button>
+        <Link to="/working">
+          <Button
+            variant="ghost"
+            className="w-full justify-start hover:bg-gray-800/50 transition-colors"
+          >
+            <Library size={18} className="mr-2" />
+            <span>Historia</span>
+          </Button>
+        </Link>
         <Button
           variant="ghost"
           className="w-full justify-start hover:bg-gray-800/50 transition-colors"
