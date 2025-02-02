@@ -3,14 +3,36 @@ org: luisdanieldlcg
 # "app" enables Serverless Framework Dashboard features and sharing them with other Services.
 app: thryv-backend
 # "service" is the name of this project. This will also be added to your AWS resource names.
-service: backend-proyecto
+service: thryv-hackaton
 
 provider:
   name: aws
   runtime: nodejs20.x
 
 functions:
-  api:  
-    handler: src/handler.handler
+  registerUser:
+    handler: src/routes/auth.register
     events:
-      - httpApi: "*"
+      - httpApi:
+          path: /auth/register
+          method: post
+  loginUser:
+    handler: src/routes/auth.login
+    events:
+      - httpApi:
+          path: /auth/login
+          method: post
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Users
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
