@@ -66,8 +66,8 @@ const loginUser = async (event, context) => {
 
   const user = users[0];
   const isPasswordValid = await comparePasswords(password, user.password);
-  // if (!isPasswordValid)
-  //   return JSend.error("El email o contraseña es incorrecto", 404);
+  if (!isPasswordValid)
+    return JSend.error("El email o contraseña es incorrecto", 404);
 
   return JSend.success({ user }, 200);
 };

@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as api from "../api/aws";
 import { useUserStore } from "../store/userStore";
 import { useCompanyStore } from "../store/companyStore";
+
 const paisesYDivisas = {
   "Republica Dominicana": "DOP",
   "Estados Unidos": "USD",
@@ -93,6 +94,8 @@ function GettingStarted() {
       province: provincia,
       currency: divisa,
     });
+
+    localStorage.setItem("company", JSON.stringify(registered.data));
 
     setCompany({
       userId: user?.userId || "8",

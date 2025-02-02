@@ -18,11 +18,10 @@ export const login = async ({ usernameOrEmail, password }) => {
       password,
     });
     console.log(response.data);
-    return response;
+    return response.status >= 200 && response.status < 300;
   } catch (error) {
     console.error(error);
-
-    return error.response;
+    return false;
   }
 };
 
