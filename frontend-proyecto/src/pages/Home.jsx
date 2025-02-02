@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 function Home() {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,9 +44,10 @@ function Home() {
 
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="max-w-md w-full space-y-8">
-          <div className="text-center">
+          <img src="/fondo.png" alt="logo" className="w-64 mx-auto" />
+          <div className="text-center texto">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              Welcome to Vuexy! 👋
+              Bienvenido a COMPASS!
             </h1>
             <p className="text-gray-600">
               Por favor, ingrese sus credenciales para continuar.
